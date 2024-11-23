@@ -1,0 +1,39 @@
+---
+- name: Install needrestart
+  ansible.builtin.apt:
+    pkg: needrestart
+    install_recommends: false
+    state: present
+
+- name: Configure needrestart conf.d files
+  ansible.builtin.template:
+    src: "config"
+    dest: "/etc/needrestart/conf.d/{{ item.name }}.conf"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+  loop: "{{ needrestart_conf_d }}"
+  loop_control:
+    label: "conf.d/{{ item.name }}.conf"
+
+- name: Configure needrestart notify.d files
+  ansible.builtin.template:
+    src: "config"
+    dest: "/etc/needrestart/notify.d/{{ item.name }}"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+  loop: "{{ needrestart_notify_d }}"
+  loop_control:
+    label: "notify.d/{{ item.name }}"
+
+- name: Configure needrestart restart.d files
+  ansible.builtin.template:
+    src: "config"
+    dest: "/etc/needrestart/restart.d/{{ item.name }}"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+  loop: "{{ needrestart_restart_d }}"
+  loop_control:
+    label: "restart.d/{{ item.name }}"
