@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include wandansible.needrestart"
+      ansible.builtin.include_role:
+        name: "wandansible.needrestart"
+      vars:
+        needrestart_conf_d:
+          - name: restart
+            config: |
+              $nrconf{restart} = 'a'

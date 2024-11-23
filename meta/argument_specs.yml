@@ -1,0 +1,52 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure needrestart
+    description: |
+      Installs needrestart and allows configuration of
+      /etc/needrestart/conf.d/*.conf, /etc/needrestart/notify.d/ and /etc/needrestart/restart.d/.
+    options:
+      needrestart_conf_d:
+        description: List of conf.d configuration files to create
+        type: list
+        elements: dict
+        default: []
+        options:
+          name:
+            description: Name of the conf.d configuration file
+            type: str
+            required: true
+          config:
+            description: Contents of the conf.d configuration file
+            type: str
+            required: true
+
+      needrestart_notify_d:
+        description: List of notify.d configuration files to create
+        type: list
+        elements: dict
+        default: []
+        options:
+          name:
+            description: Name of the notify.d configuration file
+            type: str
+            required: true
+          config:
+            description: Contents of the notify.d configuration file
+            type: str
+            required: true
+
+      needrestart_restart_d:
+        description: List of restart.d configuration files to create
+        type: list
+        elements: dict
+        default: []
+        options:
+          name:
+            description: Name of the restart.d configuration file
+            type: str
+            required: true
+          config:
+            description: Contents of the restart.d configuration file
+            type: str
+            required: true
